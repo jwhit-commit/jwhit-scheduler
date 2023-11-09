@@ -2,18 +2,49 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
+  // Get array of all time blocks
+  let hoursArr = document.getElementsByClassName("time-block");
+
+  // Listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+  // local storage. 
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+  const saveItem = (event) => {    
+    let block = {}
+
+    if (event.target.classList[0] == 'btn') {
+      block = event.target.parentElement;
+    } else {
+      block = event.target.parentElement.parentElement;
+    }
+
+    let item = block.childNodes[3].value;
+    localStorage.setItem(block.id.toString(), item);
+
+  }
+
+  for(var i=0; i < hoursArr.length; i++) {
+    hoursArr[i].lastElementChild.addEventListener("click",saveItem);
+  };
+
+  // Code to apply the past, present, or future class
+  for(var i=0; i < hoursArr.length; i++) {
+    let nowHour = dayjs().hour();
+    let blockHour = Number(hoursArr[i].id.slice(5));
+    if (blockHour<9) {
+      blockHour = blockHour + 12
+    }
+
+    if (blockHour < nowHour) {
+      hoursArr[i].classList.add("past")
+    } else if (blockHour === nowHour) {
+      hoursArr[i].classList.add("present")
+    } else {
+      hoursArr[i].classList.add("future")
+    }
+  }
+
+
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
