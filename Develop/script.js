@@ -49,6 +49,19 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
+
+  const renderItems = () => {
+    for(var i=0; i < hoursArr.length; i++) {
+      var item = localStorage.getItem(hoursArr[i].id);
+    
+      if (item) {
+          hoursArr[i].childNodes[3].value = item
+        }
+  }
+};
+
+  renderItems();
+
   //
   // TODO: Add code to display the current date in the header of the page.
 });
