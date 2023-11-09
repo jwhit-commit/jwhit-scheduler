@@ -64,4 +64,54 @@ $(function () {
 
   //
   // TODO: Add code to display the current date in the header of the page.
+  const weekDay = () => {
+    dayNum = dayjs().day();
+    if (dayNum == 0) {
+      return "Sunday"
+    } else if (dayNum == 1) {
+      return "Monday"
+    } else if (dayNum == 2) {
+      return "Tuesday"
+    } else if (dayNum == 3) {
+      return "Wednesday"
+    } else if (dayNum == 4) {
+      return "Thursday"
+    } else if (dayNum == 5) {
+      return "Friday"
+    } else if (dayNum == 6) {
+      return "Saturday"
+    }
+  };
+
+  const month = () => {
+    monNum = dayjs().month();
+    if (monNum == 0) {
+      return "January"
+    } else if (monNum == 1) {
+      return "February"
+    } else if (monNum == 2) {
+      return "March"
+    } else if (monNum == 3) {
+      return "April"
+    } else if (monNum == 4) {
+      return "May"
+    } else if (monNum == 5) {
+      return "June"
+    } else if (monNum == 6) {
+      return "July"
+    } else if (monNum == 7) {
+      return "August"
+    } else if (monNum == 8) {
+      return "September"
+    } else if (monNum == 9) {
+      return "October"
+    } else if (monNum == 10) {
+      return "November"
+    } else if (monNum == 11) {
+      return "December"
+    }
+  }
+
+  document.getElementById("currentDay").textContent = weekDay().concat(", ",month()).concat(" ", dayjs().date());
+
 });
